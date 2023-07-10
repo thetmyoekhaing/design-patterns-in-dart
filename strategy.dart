@@ -1,5 +1,3 @@
-import 'dart:async';
-
 abstract class GetFuelConsumption {
   void calculateFuel(int fuel);
 }
