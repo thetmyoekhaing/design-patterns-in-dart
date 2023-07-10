@@ -1,18 +1,30 @@
+import 'dart:async';
+
 abstract class GetFuelConsumption {
   void calculateFuel(int fuel);
 }
 
 class Electric implements GetFuelConsumption {
+  String name = 'electric';
   @override
   void calculateFuel(int fuel) {
     print("$fuel electric consumption");
   }
+
+  void printFuel() {
+    print("fuel");
+  }
 }
 
 class Fossil implements GetFuelConsumption {
+  String name = 'fossil';
   @override
   void calculateFuel(int fuel) {
     print("$fuel fossil consumption");
+  }
+
+  void printFossil() {
+    print("fossil");
   }
 }
 
@@ -34,6 +46,19 @@ class Car {
 
   void milesDriven(int mile) {
     print("$name is driven $mile miles");
+  }
+
+  void updateFuelType(String fuelType) {
+    switch (fuelType.toLowerCase()) {
+      case 'electric':
+        fuelConsumption = Electric();
+        break;
+      case 'fossil':
+        fuelConsumption = Fossil();
+        break;
+      default:
+        print("Invalid fuel type.");
+    }
   }
 }
 
