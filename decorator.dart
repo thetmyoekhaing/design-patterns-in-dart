@@ -16,8 +16,9 @@ class PlainBurger implements Burger {
 }
 
 abstract class Topping implements Burger {
-  PlainBurger burger;
+  Burger burger;
   Topping({required this.burger});
+
   @override
   double getCost() {
     return burger.getCost();
@@ -57,27 +58,25 @@ class ToppingModel {
 }
 
 void main() {
-  PlainBurger plainBurger = PlainBurger();
+  Burger plainBurger = PlainBurger();
   final cheese = ToppingModel(toppingCost: 0.3, toppingName: 'Cheese');
   final egg = ToppingModel(toppingCost: 0.5, toppingName: 'Egg');
 
   print('Plain Burger Cost ${plainBurger.getCost()}');
   print('Plain Burger Description ${plainBurger.getDescription()}');
 
-  AddTopping cheeseTopping = AddTopping(
-    burger: plainBurger,
-    toppingName: cheese.toppingName,
-    toppingCost: cheese.toppingCost,
-  );
+  plainBurger = AddTopping(
+      burger: plainBurger,
+      toppingName: cheese.toppingName,
+      toppingCost: cheese.toppingCost);
 
-  print('Plain Burger Description ${cheeseTopping.getDescription()}');
-  print('Plain Burger with cheese Cost ${cheeseTopping.getCost()}');
+  print('Plain Burger Description ${plainBurger.getDescription()}');
+  print('Plain Burger with cheese Cost ${plainBurger.getCost()}');
 
-  AddTopping eggTopping = AddTopping(
-    burger: plainBurger,
-    toppingName: egg.toppingName,
-    toppingCost: egg.toppingCost,
-  );
-  print('Plain Burger Description ${eggTopping.getDescription()}');
-  print('Plain Burger with cheese and egg Cost ${eggTopping.getCost()}');
+  plainBurger = AddTopping(
+      burger: plainBurger,
+      toppingName: egg.toppingName,
+      toppingCost: egg.toppingCost);
+  print('Plain Burger Description ${plainBurger.getDescription()}');
+  print('Plain Burger with cheese and egg Cost ${plainBurger.getCost()}');
 }
